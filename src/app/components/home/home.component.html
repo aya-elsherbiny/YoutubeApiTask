@@ -1,0 +1,68 @@
+<!---------------------------- header and search bar ----------------------------->
+<nav class="navbar bg-light navbar-light navbar-expand-lg fixed-top">
+    
+    <button class="navbar-toggler" data-target="#my-nav" data-toggle="collapse" aria-controls="my-nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div id="my-nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto col-12 d-flex justify-content-between">
+            <a class="navbar-brand ml-2">
+                <img src="\assets\logo.png" width="100px;" alt="LOGO"/>
+            </a>
+            <button class="fav btn rounded-pill text-center" data-toggle="modal" data-target="#myModal" data-dismiss="modal"(click)="showFav()">Show Favorites</button>
+            <li>
+                <input type="text" (input)="Search()" [(ngModel)]="title" placeholder="Search by video title" class="search form-control rounded-pill"/>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!----------------------------- Viewing Videos data  ----------------------------->
+<table class="table">
+    <thead>
+        <tr>
+            <th> </th>
+            <th><i class="fas fa-sort"></i> Title</th>
+            <th><i class="fas fa-sort"></i> Publish Date</th>
+            <th> </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let video of listOfVideos | paginate: { itemsPerPage: 8, currentPage: page, totalItems:totalLength }">
+            <td><a href="https://www.youtube.com/watch?v={{video.id.videoId}}"><img [src]="video.snippet.thumbnails.medium.url"alt="video-img"></a></td>
+            <td>{{video.snippet.title}}</td>
+            <td>{{video.snippet.publishTime | date:'dd-MM-yyyy'}}</td>
+            <td> <button class="btn rounded-0" (click)="viewDetails(video.id.videoId)"> Details </button> </td>
+        </tr>
+    </tbody>
+</table>
+
+<!-------------------------------------- Pagination  --------------------------------->
+<div class="d-flex flex-column align-items-center">
+    <pagination-controls class="pagination" (pageChange)="page = $event"></pagination-controls>
+</div>
+ 
+<!-------------------------------------- Modal to show Fav  --------------------------------->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h3 class="modal-title" id="exampleModalLongTitle"> Favorites </h3>
+        </div>
+        <div class="modal-body">
+            <div class="d-flex flex-row justify-content-between" *ngFor="let item of favorites">
+                <a href="https://www.youtube.com/watch?v={{item.video.id}}">
+                    <img id="modalImage" [src]="item.video.snippet.thumbnails.medium.url">
+                </a>
+                <h6 class="col-7">{{item.video.snippet.title}} </h6>
+                <h5 class="col-4" id="rate"><i class="fas fa-star"></i> {{item.rating}}</h5>
+            </div>
+            
+        </div>
+        <div class="modal-footer justify-content-center">
+            <button type="button" class="btn add col-5"  data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>
+

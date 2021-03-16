@@ -1,0 +1,44 @@
+.content, table{
+    margin-top:65px;
+}
+input{
+    background-color: rgba(245, 245, 245, 0.2);
+    color: lightgrey;
+}
+img{
+    width: 120px;
+    height: auto;
+}
+.btn, button{
+    height:40px;
+    width:130px;
+    border: solid black 2px ;
+    color: black;
+    background-color: white;
+}
+.btn:hover, button:hover{
+    background-color: rgb(207, 7, 7);
+    color:white;
+}
+.pagination ::ng-deep .ngx-pagination .current {
+    background: rgb(207, 7, 7);
+}
+#modalImage{
+    width:100px; height:50px;
+}
+#rate{
+    color:rgb(207, 7, 7);
+    font-size: 16px;
+}
+.fav{
+    border: solid 1px darkgray;
+    width:150px;
+    background-color: rgba(245, 245, 245, 0.2);
+}
+
+.fav:hover{
+    background-color: white;
+    color:black;
+    border: solid black 2px ;
+    font-weight: bold;
+}
